@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxg.middleground.provider.mapper.KxgSmsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.kxg.middleground.provider.pojo.KxgSmsInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="max_verify_times" jdbcType="INTEGER" property="maxVerifyTimes" />
+    <result column="verify_times" jdbcType="INTEGER" property="verifyTimes" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="template_id" jdbcType="BIGINT" property="templateId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="request_id" jdbcType="VARCHAR" property="requestId" />
+    <result column="biz_id" jdbcType="VARCHAR" property="bizId" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="app_key" jdbcType="VARCHAR" property="appKey" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime" />
+  </resultMap>
+</mapper>

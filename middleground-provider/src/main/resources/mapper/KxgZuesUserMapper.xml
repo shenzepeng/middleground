@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxg.middleground.provider.mapper.KxgZuesUserMapper">
+  <resultMap id="BaseResultMap" type="com.kxg.middleground.provider.pojo.KxgZuesUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="request_id" jdbcType="VARCHAR" property="requestId" />
+    <result column="header_url" jdbcType="VARCHAR" property="headerUrl" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+  </resultMap>
+</mapper>

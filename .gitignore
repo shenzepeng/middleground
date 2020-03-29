@@ -1,0 +1,3 @@
+# Project exclude paths
+/middleground-interface/target/
+/middleground-provider/target/
