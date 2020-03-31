@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxg.middleground.provider.mapper.KxgAssemblySerectMapper">
+  <resultMap id="BaseResultMap" type="com.kxg.middleground.provider.pojo.KxgAssemblySerect">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="assembly_id" jdbcType="BIGINT" property="assemblyId" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="access_key" jdbcType="VARCHAR" property="accessKey" />
+  </resultMap>
+  <!--开启二级缓存-->
+  <cache />
+</mapper>

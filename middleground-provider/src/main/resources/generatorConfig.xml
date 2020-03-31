@@ -70,46 +70,48 @@
              -->
         <!-- <property name="rootInterface" value="com.kxg.middleground.provider.mapper.CommonMapper"/>-->
         </javaClientGenerator>
-        <table tableName="t_assembly" domainObjectName="KxgAssembly">
+<!--        <table tableName="t_assembly" domainObjectName="KxgAssembly">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_img_file_db" domainObjectName="KxgImgFileDb">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_ocr_img" domainObjectName="KxgOcrImg">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_ocr_img_exist_number" domainObjectName="KxgOcrImgExistNumber">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_product" domainObjectName="KxgProduct">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_product_black_list" domainObjectName="KxgProductBlackList">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_product_white_list" domainObjectName="KxgProductWhiteList">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_server_app_key" domainObjectName="KxgServerAppKey">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_sms_exist_number" domainObjectName="KxgSmsExistNumber">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_sms_info" domainObjectName="KxgSmsInfo">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_static_file_db" domainObjectName="KxgStaticFileDb">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="t_assembly_product_ship" domainObjectName="KxgAssemblyProductShip">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="t_img_file_db" domainObjectName="KxgImgFileDb">
+        <table tableName="t_assembly_serect" domainObjectName="KxgAssemblySerect">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="t_ocr_img" domainObjectName="KxgOcrImg">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_ocr_img_exist_number" domainObjectName="KxgOcrImgExistNumber">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_product" domainObjectName="KxgProduct">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_product_black_list" domainObjectName="KxgProductBlackList">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_product_white_list" domainObjectName="KxgProductWhiteList">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_server_app_key" domainObjectName="KxgServerAppKey">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_sms_exist_number" domainObjectName="KxgSmsExistNumber">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_sms_info" domainObjectName="KxgSmsInfo">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_static_file_db" domainObjectName="KxgStaticFileDb">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_user_black_list" domainObjectName="KxgUserBlackList">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_zues_user" domainObjectName="KxgZuesUser">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-
+<!--        <table tableName="t_zues_user" domainObjectName="KxgZuesUser">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 
     </context>
 </generatorConfiguration>
