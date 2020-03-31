@@ -1,4 +1,4 @@
-package com.kxg.middleground.provider.constants.enums;
+package com.kxg.middleground.provider.constants;
 
 import com.google.common.collect.Maps;
 
