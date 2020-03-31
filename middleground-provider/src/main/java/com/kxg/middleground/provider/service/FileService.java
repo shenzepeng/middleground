@@ -7,4 +7,5 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface FileService {
     FileUrl uploadImg(MultipartFile file, HttpServletRequest request) ;
+    FileUrl uploadBigFile(MultipartFile file,HttpServletRequest request);
 }

@@ -8,6 +8,7 @@ import com.kxg.middleground.provider.model.FileType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,11 +22,10 @@ import java.util.Random;
  * @Date: 2019-06-07 08:28
  * @Description: 沈泽鹏写点注释吧
  */
-@Configuration
+@Component
 public class OSSClientUtil {
     Log log = LogFactory.getLog(OSSClientUtil.class);
     // endpoint以杭州为例，其它region请按实际情况填写
-
     private String endpoint = "http://oss-cn-beijing.aliyuncs.com";
     // accessKey
     private String accessKeyId = "LTAIfo7xBETxaY0m";
@@ -68,7 +68,7 @@ public class OSSClientUtil {
             String[] split = url.split("/");
             this.uploadFile2OSS(fin, split[split.length - 1]);
         } catch (FileNotFoundException e) {
-            //System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -77,13 +77,12 @@ public class OSSClientUtil {
         String substring = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
         Random random = new Random();
         String name = random.nextInt(10000) + System.currentTimeMillis() + substring;
-        System.out.println(name);
         try {
             InputStream inputStream = file.getInputStream();
             this.uploadFile2OSS(inputStream, name);
             return name;
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            log.error(e.getMessage());
             return null;
         }
 
@@ -209,7 +208,7 @@ public class OSSClientUtil {
      */
     public String getUrl(String key) {
         // 设置URL过期时间为10年  3600l* 1000*24*365*10
-        Date expiration = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);
+        Date expiration = new Date(System.currentTimeMillis() + 3600L * 1000 * 24 * 365 * 10);
         // 生成URL
         URL url = ossClient.generatePresignedUrl(bucketName, key, expiration);
         if (url != null) {

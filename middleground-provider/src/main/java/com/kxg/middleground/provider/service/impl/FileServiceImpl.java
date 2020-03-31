@@ -46,4 +46,9 @@ public class FileServiceImpl implements FileService {
         kxgImgFileDbDao.addImgFile(fileDb);
         return fileUrl;
     }
+
+    @Override
+    public FileUrl uploadBigFile(MultipartFile file, HttpServletRequest request) {
+        return null;
+    }
 }

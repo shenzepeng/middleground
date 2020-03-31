@@ -8,7 +8,9 @@
 
     <!--指定特定数据库的jdbc驱动jar包的位置 -->
     <classPathEntry
-            location="/Users/mac/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar"/>
+            location="D:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\jbr\bin\本地仓库路径\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
+<!--    <classPathEntry-->
+<!--            location="/Users/mac/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar"/>-->
 
     <context id="MySql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
