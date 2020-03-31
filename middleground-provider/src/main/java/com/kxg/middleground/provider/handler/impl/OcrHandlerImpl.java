@@ -24,7 +24,6 @@ public class OcrHandlerImpl implements OcrHandler {
         // 调用接口
         //进行网络图片的识别
         JSONObject jsonObject = client.generalUrl(imgUrl, null);
-        System.out.println(jsonObject.toString());
         //转为jsonObject
         JSONArray jsonArray = jsonObject.getJSONArray("words_result");
         StringBuffer buffer=new StringBuffer();

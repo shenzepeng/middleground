@@ -3,6 +3,7 @@ package com.kxg.middleground.provider.controller;
 import com.kxg.middleground.provider.common.SzpJsonResult;
 import com.kxg.middleground.provider.service.ZuesUserService;
 import com.kxg.middleground.request.AddZuesUserRequest;
+import com.kxg.middleground.request.UpdateUserInfoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +42,16 @@ public class UserController {
     public SzpJsonResult<?> addUserInfo(@RequestBody AddZuesUserRequest addZuesUserRequest){
         return SzpJsonResult.ok(zuesUserService.addUserInfo(addZuesUserRequest));
     }
+
+    /**
+     * 更新用户信息
+     * @param request
+     * @return
+     */
+    @PutMapping("update/user/info")
+    public SzpJsonResult<?> updateUserInfo(@RequestBody UpdateUserInfoRequest request){
+        return SzpJsonResult.ok();
+    }
+
 
 }

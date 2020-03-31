@@ -1,4 +1,4 @@
-package com.kxg.middleground;
+package com.kxg.middleground.service;
 
 public interface DemoService {
 

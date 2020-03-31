@@ -1,7 +1,7 @@
 package com.kxg.middleground.provider.dubbo.service;
 
 import org.apache.dubbo.config.annotation.Service;
-import com.kxg.middleground.DemoService;
+import com.kxg.middleground.service.DemoService;
 import org.apache.dubbo.rpc.RpcContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
