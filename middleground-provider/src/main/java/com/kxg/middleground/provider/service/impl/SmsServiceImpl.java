@@ -18,4 +18,9 @@ public class SmsServiceImpl implements SmsService {
     public void sentCode(String phoneNumber) {
 
     }
+
+    @Override
+    public Boolean verification(String phoneNumber, String code) {
+        return null;
+    }
 }

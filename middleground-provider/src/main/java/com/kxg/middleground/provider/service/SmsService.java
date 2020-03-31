@@ -8,4 +8,5 @@ package com.kxg.middleground.provider.service;
 
 public interface SmsService {
     void sentCode(String phoneNumber);
+    Boolean verification(String phoneNumber,String code);
 }
