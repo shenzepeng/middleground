@@ -5,6 +5,7 @@ import com.kxg.middleground.provider.handler.WxChatHandler;
 import com.kxg.middleground.provider.pojo.KxgZuesUser;
 import com.kxg.middleground.provider.service.ZuesUserService;
 import com.kxg.middleground.request.AddZuesUserRequest;
+import com.kxg.middleground.response.IntegerResultResponse;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ public class ZuesUserServiceImpl implements ZuesUserService {
     @Autowired
     private WxChatHandler wxChatHandler;
     @Override
-    public Boolean makeSureThisUserIsExist(String code) {
+    public IntegerResultResponse makeSureThisUserIsExist(String code) {
+        IntegerResultResponse resultResponse=new IntegerResultResponse();
         String openId = wxChatHandler.getWxChatOpenIdHandler(code);
         if (StringUtils.isEmpty(openId)){
             //没有拿到openId服务异常
@@ -35,9 +37,10 @@ public class ZuesUserServiceImpl implements ZuesUserService {
         List<KxgZuesUser> userByOpenId = kxgZuseUserDao.findUserByOpenId(openId);
         //当前openID不存在则
         if (CollectionUtils.isEmpty(userByOpenId)){
-            return false;
+            resultResponse.setResult(1);
         }
-        return true;
+        resultResponse.setResult(0);
+        return resultResponse;
     }
 
     /**
@@ -46,11 +49,14 @@ public class ZuesUserServiceImpl implements ZuesUserService {
      * @return
      */
     @Override
-    public Integer addUserInfo(AddZuesUserRequest request) {
+    public IntegerResultResponse addUserInfo(AddZuesUserRequest request) {
+        IntegerResultResponse resultResponse=new IntegerResultResponse();
         KxgZuesUser kxgZuesUser=new KxgZuesUser();
         BeanUtils.copyProperties(request,kxgZuesUser);
         kxgZuesUser.setCreateTime(new Date());
         kxgZuesUser.setCreateTime(new Date());
-        return kxgZuseUserDao.addUser(kxgZuesUser);
+        Integer result = kxgZuseUserDao.addUser(kxgZuesUser);
+        resultResponse.setResult(result);
+        return resultResponse;
     }
 }

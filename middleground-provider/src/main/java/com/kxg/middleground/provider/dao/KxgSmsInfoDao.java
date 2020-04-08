@@ -1,5 +1,6 @@
 package com.kxg.middleground.provider.dao;
 
+import com.kxg.middleground.provider.constants.MiddlerGroudConstans;
 import com.kxg.middleground.provider.mapper.KxgSmsInfoMapper;
 import com.kxg.middleground.provider.pojo.KxgSmsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,20 @@ public class KxgSmsInfoDao {
         example.createCriteria()
                 .andEqualTo("phoneNumber",phoneNumber)
                 .andEqualTo("code",code);
+        return kxgSmsInfoMapper.selectByExample(example);
+    }
+
+    /**
+     * 通过手机号找到最新的验证码
+     * @param phoneNumber
+     * @return
+     */
+    public List<KxgSmsInfo> findSmsInfoByPhoneNumber(String phoneNumber){
+        Example example=new Example(KxgSmsInfo.class);
+        example.createCriteria()
+                .andEqualTo("phoneNumber",phoneNumber)
+                .andEqualTo("status", MiddlerGroudConstans.SMS_VERIFY_PASS);
+        example.orderBy("id").desc();
         return kxgSmsInfoMapper.selectByExample(example);
     }
 

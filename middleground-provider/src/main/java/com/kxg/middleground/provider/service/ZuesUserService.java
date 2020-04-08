@@ -1,6 +1,7 @@
 package com.kxg.middleground.provider.service;
 
 import com.kxg.middleground.request.AddZuesUserRequest;
+import com.kxg.middleground.response.IntegerResultResponse;
 
 /**
  * @Auther: szp
@@ -8,6 +9,6 @@ import com.kxg.middleground.request.AddZuesUserRequest;
  * @Description: 用户系统
  */
 public interface ZuesUserService {
-    Boolean makeSureThisUserIsExist(String code);
-    Integer addUserInfo(AddZuesUserRequest request);
+    IntegerResultResponse makeSureThisUserIsExist(String code);
+    IntegerResultResponse addUserInfo(AddZuesUserRequest request);
 }
