@@ -39,15 +39,55 @@ public class KxgProductDao {
     }
 
     /**
-     * 通过userid找到用户信息
+     * 通过userid找到项目
      * @param userId
      * @return
      */
-    public List<KxgProduct> findProductByUserId(String userId){
+    public List<KxgProduct> findProductByUserId(Long userId){
         Example example=new Example(KxgProduct.class);
         example.createCriteria().andEqualTo("userId",userId);
         example.orderBy("id").desc();
         return kxgProductMapper.selectByExample(example);
+    }
+
+    /**
+     * 通过openid
+     * @param openId
+     * @return
+     */
+    public List<KxgProduct> findProductByOpenId(String openId){
+        Example example=new Example(KxgProduct.class);
+        example.createCriteria().andEqualTo("openid",openId);
+        example.orderBy("id").desc();
+        return kxgProductMapper.selectByExample(example);
+    }
+
+    /**
+     * 通过userid和项目名称找到项目信息
+     * @param userId
+     * @return
+     */
+    public List<KxgProduct> findProductByUserIdAndProductName(Long userId,String productName){
+        Example example=new Example(KxgProduct.class);
+        example.createCriteria().andEqualTo("userId",userId).andLike("productName","%"+productName+"%");
+        example.orderBy("id").desc();
+        return kxgProductMapper.selectByExample(example);
+    }
+
+    public List<KxgProduct> findProductByOpenidAndProductName(String openId,String productName){
+        Example example=new Example(KxgProduct.class);
+        example.createCriteria().andEqualTo("openid",openId).andLike("productName","%"+productName+"%");
+        example.orderBy("id").desc();
+        return kxgProductMapper.selectByExample(example);
+    }
+
+    /**
+     * 通过项目id找到项目
+     * @param id
+     * @return
+     */
+    public KxgProduct findProductById(Long id){
+        return kxgProductMapper.selectByPrimaryKey(id);
     }
 
 

@@ -24,6 +24,14 @@ public class KxgAssemblyProductShipDao {
     }
 
     /**
+     * 添加list
+     * @param kxgAssemblyProductShips
+     * @return
+     */
+    public Integer addShipList(List<KxgAssemblyProductShip> kxgAssemblyProductShips){
+        return shipMapper.insertList(kxgAssemblyProductShips);
+    }
+    /**
      * 通过项目id找到关系
      * @param productId
      * @return

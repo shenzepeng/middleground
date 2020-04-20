@@ -53,4 +53,14 @@ public class KxgAssemblyDao {
     public Integer updateAssemblyInfo(KxgAssembly kxgAssembly){
         return kxgAssemblyMapper.updateByPrimaryKeySelective(kxgAssembly);
     }
+
+    /**
+     * 通过主键查找
+     *
+     * @param id
+     * @return
+     */
+    public KxgAssembly findAssemblyById(Long id){
+        return kxgAssemblyMapper.selectByPrimaryKey(id);
+    }
 }

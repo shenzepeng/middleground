@@ -1,9 +1,13 @@
 package com.kxg.middleground.provider.controller;
 
+import com.kxg.middleground.provider.common.SzpJsonResult;
 import com.kxg.middleground.provider.service.AssemblyService;
+import com.kxg.middleground.request.FindAllAssemblyRequest;
+import com.kxg.middleground.request.UpdateAssemblyRequest;
+import com.kxg.middleground.response.FindAllAssemblyResponse;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 组件信息
@@ -20,10 +24,17 @@ public class AssemblyController {
     /**
      * 查看组件列表
      */
-
+    @ApiOperation("查看组件列表")
+    @PostMapping("search")
+    public SzpJsonResult<FindAllAssemblyResponse>  findAllAssembly(@RequestBody FindAllAssemblyRequest request){
+        return SzpJsonResult.ok(assemblyService);
+    }
     /**
-     * 显示已经添加的组件
+     * 更新组件
      */
 
+    public SzpJsonResult<?> updateAssembly(@RequestBody UpdateAssemblyRequest request){
+        return SzpJsonResult.ok();
+    }
 
 }
