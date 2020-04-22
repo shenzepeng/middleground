@@ -4,6 +4,8 @@ import com.kxg.middleground.provider.common.SzpJsonResult;
 import com.kxg.middleground.provider.service.ZuesUserService;
 import com.kxg.middleground.request.AddZuesUserRequest;
 import com.kxg.middleground.request.UpdateUserInfoRequest;
+import com.kxg.middleground.response.IntegerResultResponse;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +27,9 @@ public class UserController {
      * @param code
      * @return
      */
+    @ApiOperation("通过code看当前openid是否存在,0存在1不存在，不存在走添加逻辑")
     @GetMapping("make/sure/user/is/exist")
-    public SzpJsonResult<Boolean> makeSureUserIsExist(String code){
+    public SzpJsonResult<IntegerResultResponse> makeSureUserIsExist(String code){
         return SzpJsonResult.ok(zuesUserService.makeSureThisUserIsExist(code));
     }
 
@@ -38,8 +41,9 @@ public class UserController {
      * @param addZuesUserRequest
      * @return
      */
+    @ApiOperation("添加新的用户")
     @PostMapping("add/user/info")
-    public SzpJsonResult<?> addUserInfo(@RequestBody AddZuesUserRequest addZuesUserRequest){
+    public SzpJsonResult<IntegerResultResponse> addUserInfo(@RequestBody AddZuesUserRequest addZuesUserRequest){
         return SzpJsonResult.ok(zuesUserService.addUserInfo(addZuesUserRequest));
     }
 
@@ -48,8 +52,9 @@ public class UserController {
      * @param request
      * @return
      */
+    @ApiOperation("更新新的用户信息")
     @PutMapping("update/user/info")
-    public SzpJsonResult<?> updateUserInfo(@RequestBody UpdateUserInfoRequest request){
+    public SzpJsonResult<IntegerResultResponse> updateUserInfo(@RequestBody UpdateUserInfoRequest request){
         return SzpJsonResult.ok();
     }
 

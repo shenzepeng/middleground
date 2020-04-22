@@ -5,6 +5,7 @@ import com.kxg.middleground.provider.service.AssemblyService;
 import com.kxg.middleground.request.FindAllAssemblyRequest;
 import com.kxg.middleground.request.UpdateAssemblyRequest;
 import com.kxg.middleground.response.FindAllAssemblyResponse;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 组件信息
  */
+@Api("组件信息")
 @RestController
 @RequestMapping("assembly")
 public class AssemblyController {

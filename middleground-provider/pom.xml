@@ -3,27 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
         <groupId>com.kxg</groupId>
         <artifactId>middleground</artifactId>
         <version>1.0.0</version>
     </parent>
 
-	<groupId>com.kxg</groupId>
-	<artifactId>middleground-provider</artifactId>
-	<version>1.0.0</version>
-	<packaging>jar</packaging>
-	<name>${project.artifactId}</name>
-	<description>The demo provider module of dubbo project</description>
-	<properties>
+    <groupId>com.kxg</groupId>
+    <artifactId>middleground-provider</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+    <name>${project.artifactId}</name>
+    <description>The demo provider module of dubbo project</description>
+    <properties>
         <skip_maven_deploy>true</skip_maven_deploy>
         <slf4j-log4j12.version>1.7.25</slf4j-log4j12.version>
         <curator.version>2.12.0</curator.version>
         <dubbo.version>2.7.3</dubbo.version>
     </properties>
 
-	<dependencies>
+    <dependencies>
         <!--mybatis 分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -41,6 +41,7 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.6.1</version>
         </dependency>
+
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
@@ -68,11 +69,24 @@
             <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
             <version>1.1.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.5.RELEASE</version>
+            <!-- 移除嵌入式tomcat插件 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -133,14 +147,13 @@
 
         <!-- httpclient -->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.5</version>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
         </dependency>
-
     </dependencies>
 
-	<build>
+    <build>
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
@@ -209,34 +222,5 @@
             </resource>
         </resources>
     </build>
-
- 
-<!--	<build>-->
-<!--        <plugins>-->
-<!--            &lt;!&ndash; 编译插件 &ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.3</version>-->
-<!--                <configuration>-->
-<!--                    <source>1.8</source>-->
-<!--                    <target>1.8</target>-->
-<!--                    <encoding>UTF-8</encoding>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            &lt;!&ndash; tomcat7插件 &ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.tomcat.maven</groupId>-->
-<!--                <artifactId>tomcat7-maven-plugin</artifactId>-->
-<!--                <version>2.2</version>-->
-<!--                <configuration>-->
-<!--                    <path>/</path>-->
-<!--                    <port>8080</port>-->
-<!--                    &lt;!&ndash; 设置GET请求编码 &ndash;&gt;-->
-<!--                    <uriEncoding>UTF-8</uriEncoding>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
 
 </project>

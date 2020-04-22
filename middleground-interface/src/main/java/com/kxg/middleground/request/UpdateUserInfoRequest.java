@@ -18,4 +18,6 @@ public class UpdateUserInfoRequest implements Serializable {
 
     private String openId;
 
+    private Long userId;
+
 }

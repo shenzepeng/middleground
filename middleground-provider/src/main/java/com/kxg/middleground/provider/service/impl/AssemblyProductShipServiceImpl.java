@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,7 +33,11 @@ public class AssemblyProductShipServiceImpl implements AssemblyProductShipServic
      */
     @Override
     public IntegerResultResponse addAssemblyProductShip(AddAssProductShipRequest request) {
+        if (CollectionUtils.isEmpty(request.getProductIds())){
+            throw new RuntimeException("product ids can not be null");
+        }
         IntegerResultResponse integerResultResponse=new IntegerResultResponse();
+
         List<KxgAssemblyProductShip> needAddShip=new ArrayList<>();
         List<Long> productIds = request.getProductIds();
         for (Long productId : productIds) {

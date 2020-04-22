@@ -6,6 +6,7 @@ import com.kxg.middleground.request.AddAssProductShipRequest;
 import com.kxg.middleground.request.FindCanAddAssemblyProductByUserIdRequest;
 import com.kxg.middleground.response.FindCanAddAssemblyProductResponse;
 import com.kxg.middleground.response.IntegerResultResponse;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 组件关系
  */
+@Api("组件关系")
 @RestController
 @RequestMapping("ship")
 public class AssemblyProductShipController {
@@ -25,7 +27,7 @@ public class AssemblyProductShipController {
      */
     @ApiOperation("添加组件关系")
     @PostMapping("add/list")
-    public SzpJsonResult<IntegerResultResponse> addShip(AddAssProductShipRequest request){
+    public SzpJsonResult<IntegerResultResponse> addShip(@RequestBody AddAssProductShipRequest request){
         return SzpJsonResult.ok(assemblyProductShipService.addAssemblyProductShip(request));
     }
     /**

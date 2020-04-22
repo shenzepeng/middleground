@@ -7,9 +7,11 @@ import com.kxg.middleground.provider.service.ZuesUserService;
 import com.kxg.middleground.request.AddZuesUserRequest;
 import com.kxg.middleground.response.IntegerResultResponse;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -21,7 +23,8 @@ import java.util.List;
  * @Date: 2020/3/31 18:31
  * @Description: 沈泽鹏写点注释吧
  */
-@Data
+@Slf4j
+@Service
 public class ZuesUserServiceImpl implements ZuesUserService {
     @Autowired
     private KxgZuseUserDao kxgZuseUserDao;
@@ -30,9 +33,15 @@ public class ZuesUserServiceImpl implements ZuesUserService {
     @Override
     public IntegerResultResponse makeSureThisUserIsExist(String code) {
         IntegerResultResponse resultResponse=new IntegerResultResponse();
-        String openId = wxChatHandler.getWxChatOpenIdHandler(code);
+        String openId=null;
+        try {
+            openId = wxChatHandler.getWxChatOpenIdHandler(code);
+        }catch (Exception e){
+            log.error("get openid code is not right {}",e.getMessage());
+        }
         if (StringUtils.isEmpty(openId)){
             //没有拿到openId服务异常
+            throw new RuntimeException("get openid code is not right,can not get openId from weChat service");
         }
         List<KxgZuesUser> userByOpenId = kxgZuseUserDao.findUserByOpenId(openId);
         //当前openID不存在则

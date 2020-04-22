@@ -9,11 +9,13 @@ import com.kxg.middleground.response.FindAllProductByUserIdResponse;
 import com.kxg.middleground.response.FindMyProductInfoResponse;
 import com.kxg.middleground.response.FindProductInfoResponse;
 import com.kxg.middleground.response.IntegerResultResponse;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Api("项目")
 @RequestMapping("product")
 public class ProductController {
     @Autowired
