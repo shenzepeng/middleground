@@ -60,7 +60,7 @@ public class KxgSmsInfoDao {
         Example example=new Example(KxgSmsInfo.class);
         example.createCriteria()
                 .andEqualTo("phoneNumber",phoneNumber)
-                .andEqualTo("status", MiddlerGroudConstans.SMS_VERIFY_PASS);
+                .andEqualTo("status", MiddlerGroudConstans.SMS_NOT_VERIFY_PASS);
         example.orderBy("id").desc();
         return kxgSmsInfoMapper.selectByExample(example);
     }

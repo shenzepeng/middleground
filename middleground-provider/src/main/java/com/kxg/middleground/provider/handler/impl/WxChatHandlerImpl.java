@@ -30,9 +30,9 @@ public class WxChatHandlerImpl implements WxChatHandler {
         String url = "https://api.weixin.qq.com/sns/jscode2session";
         Map<String, String> param = new HashMap<>();
         //小程序id
-        param.put("appid", "wxe5e476c440a56df3");
+        param.put("appid", "wxfe82090938acc5c0");
         //微信秘钥
-        param.put("secret", "c21f05d89c84af53d1fc8675467b1bf7");
+        param.put("secret", "3a15ee451257cdb85f270af70737eb7b");
         param.put("js_code", code);
         //写死
         param.put("grant_type", "authorization_code");
@@ -41,4 +41,6 @@ public class WxChatHandlerImpl implements WxChatHandler {
         WXSessionModel model = JsonUtils.jsonToPojo(wxResult, WXSessionModel.class);
         return  model.getOpenid();
     }
+
+
 }

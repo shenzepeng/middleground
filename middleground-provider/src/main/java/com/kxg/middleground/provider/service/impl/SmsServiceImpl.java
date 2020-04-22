@@ -42,6 +42,7 @@ public class SmsServiceImpl implements SmsService {
         smsInfo.setCreateTime(new Date());
         smsInfo.setUpdateTime(new Date());
         smsInfo.setMaxVerifyTimes(MiddlerGroudConstans.MAX_VERIFY_TIMES);
+        smsInfo.setVerifyTimes(0);
         smsInfo.setRequestId(sendSmsResponse.getRequestId());
         smsInfo.setStatus(MiddlerGroudConstans.SMS_NOT_VERIFY_PASS);
         smsInfo.setUserId(request.getUserId());
