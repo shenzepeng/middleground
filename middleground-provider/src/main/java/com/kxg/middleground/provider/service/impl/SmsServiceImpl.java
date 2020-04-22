@@ -37,6 +37,7 @@ public class SmsServiceImpl implements SmsService {
         KxgSmsInfo smsInfo=new KxgSmsInfo();
         smsInfo.setAppKey(request.getAppKey());
         smsInfo.setBizId(sendSmsResponse.getBizId());
+        smsInfo.setPhoneNumber(request.getPhoneNumber());
         smsInfo.setContent(code);
         smsInfo.setCreateTime(new Date());
         smsInfo.setUpdateTime(new Date());
