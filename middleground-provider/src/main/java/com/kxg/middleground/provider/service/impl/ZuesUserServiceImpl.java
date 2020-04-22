@@ -5,6 +5,7 @@ import com.kxg.middleground.provider.handler.WxChatHandler;
 import com.kxg.middleground.provider.pojo.KxgZuesUser;
 import com.kxg.middleground.provider.service.ZuesUserService;
 import com.kxg.middleground.request.AddZuesUserRequest;
+import com.kxg.middleground.response.FindOpenIdResponse;
 import com.kxg.middleground.response.IntegerResultResponse;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +32,8 @@ public class ZuesUserServiceImpl implements ZuesUserService {
     @Autowired
     private WxChatHandler wxChatHandler;
     @Override
-    public IntegerResultResponse makeSureThisUserIsExist(String code) {
-        IntegerResultResponse resultResponse=new IntegerResultResponse();
+    public FindOpenIdResponse makeSureThisUserIsExist(String code) {
+        FindOpenIdResponse resultResponse=new FindOpenIdResponse();
         String openId=null;
         try {
             openId = wxChatHandler.getWxChatOpenIdHandler(code);
@@ -49,6 +50,7 @@ public class ZuesUserServiceImpl implements ZuesUserService {
             resultResponse.setResult(1);
         }
         resultResponse.setResult(0);
+        resultResponse.setOpenId(openId);
         return resultResponse;
     }
 
