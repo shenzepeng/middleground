@@ -1,6 +1,6 @@
 package com.kxg.middleground.response;
 
-import com.kxg.middleground.dto.ZuesUserInfoDto;
+
 import lombok.Data;
 
 import java.util.Date;
