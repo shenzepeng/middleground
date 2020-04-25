@@ -3,7 +3,9 @@ package com.kxg.middleground.provider.controller;
 import com.kxg.middleground.provider.common.SzpJsonResult;
 import com.kxg.middleground.provider.service.ZuesUserService;
 import com.kxg.middleground.request.AddZuesUserRequest;
+import com.kxg.middleground.request.FindUserInfoRequest;
 import com.kxg.middleground.request.UpdateUserInfoRequest;
+import com.kxg.middleground.response.FindUserInfoResponse;
 import com.kxg.middleground.response.IntegerResultResponse;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,13 @@ public class UserController {
     @PutMapping("update/user/info")
     public SzpJsonResult<IntegerResultResponse> updateUserInfo(@RequestBody UpdateUserInfoRequest request){
         return SzpJsonResult.ok();
+    }
+
+
+    @ApiOperation("查看用户信息")
+    @PostMapping("find/user/info")
+    public SzpJsonResult<FindUserInfoResponse> findUserInfo(@RequestBody FindUserInfoRequest request){
+        return SzpJsonResult.ok(zuesUserService.findUserInfo(request));
     }
 
 

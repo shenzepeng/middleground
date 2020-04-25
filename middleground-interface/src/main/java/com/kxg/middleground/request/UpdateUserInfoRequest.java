@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Date;
 @Data
 public class UpdateUserInfoRequest implements Serializable {
+    private Long id;
+
     private String phoneNumber;
 
     private String password;
@@ -17,7 +19,5 @@ public class UpdateUserInfoRequest implements Serializable {
     private String nickName;
 
     private String openId;
-
-    private Long userId;
 
 }

@@ -4,6 +4,7 @@ import com.kxg.middleground.provider.common.SzpJsonResult;
 import com.kxg.middleground.provider.service.SmsService;
 import com.kxg.middleground.request.SentSmsCodeRequest;
 import com.kxg.middleground.request.VerificationSmsCodeRequest;
+import com.kxg.middleground.response.IntegerResultResponse;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,15 +27,15 @@ public class SmsController {
      */
     @ApiOperation("验证短信,1成功，0失败，zues的appkey-4CE8EE38DCED46D2")
     @PostMapping("sent")
-    public SzpJsonResult<Boolean> verificationSms(@RequestBody SentSmsCodeRequest request){
+    public SzpJsonResult<IntegerResultResponse> verificationSms(@RequestBody SentSmsCodeRequest request){
         return SzpJsonResult.ok(smsService.sentCode(request));
     }
     /**
      * 发送短信
      */
-    @ApiOperation("发送短信")
-    @PostMapping("ver,1成功，0失败")
-    public SzpJsonResult<Boolean> sendSmsCode(@RequestBody VerificationSmsCodeRequest request){
+    @ApiOperation("发送短信,1成功，0失败")
+    @PostMapping("ver")
+    public SzpJsonResult<IntegerResultResponse> sendSmsCode(@RequestBody VerificationSmsCodeRequest request){
         return SzpJsonResult.ok(smsService.verification(request));
     }
 

@@ -1,10 +1,17 @@
-package com.kxg.middleground.dto;
+package com.kxg.middleground.response;
 
+import com.kxg.middleground.dto.ZuesUserInfoDto;
 import lombok.Data;
 
 import java.util.Date;
+
+/**
+ * @Auther: szp
+ * @Date: 2020/4/24 20:39
+ * @Description: 沈泽鹏写点注释吧
+ */
 @Data
-public class ZuesUserInfoDto {
+public class FindUserInfoResponse  {
 
     private Long id;
 

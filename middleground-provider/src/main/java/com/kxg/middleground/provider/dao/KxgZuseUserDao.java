@@ -1,7 +1,9 @@
 package com.kxg.middleground.provider.dao;
 
 import com.kxg.middleground.provider.mapper.KxgZuesUserMapper;
+import com.kxg.middleground.provider.pojo.KxgProduct;
 import com.kxg.middleground.provider.pojo.KxgZuesUser;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -49,5 +51,23 @@ public class KxgZuseUserDao {
         example.createCriteria()
                 .andEqualTo("phoneNumber",phoneNumber);
         return zuesUserMapper.selectByExample(example);
+    }
+
+    /**
+     * 通过主键id查找
+     * @param id
+     * @return
+     */
+    public KxgZuesUser findZuesById(Long id){
+        return zuesUserMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 通过主键更新
+     * @param zuesUser
+     * @return
+     */
+    public Integer updateUserInfo(KxgZuesUser zuesUser){
+        return zuesUserMapper.updateByPrimaryKeySelective(zuesUser);
     }
 }

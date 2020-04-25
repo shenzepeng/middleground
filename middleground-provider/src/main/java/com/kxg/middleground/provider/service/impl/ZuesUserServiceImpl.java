@@ -4,8 +4,12 @@ import com.kxg.middleground.provider.dao.KxgZuseUserDao;
 import com.kxg.middleground.provider.handler.WxChatHandler;
 import com.kxg.middleground.provider.pojo.KxgZuesUser;
 import com.kxg.middleground.provider.service.ZuesUserService;
+import com.kxg.middleground.provider.utils.JsonUtils;
 import com.kxg.middleground.request.AddZuesUserRequest;
+import com.kxg.middleground.request.FindUserInfoRequest;
+import com.kxg.middleground.request.UpdateUserInfoRequest;
 import com.kxg.middleground.response.FindOpenIdResponse;
+import com.kxg.middleground.response.FindUserInfoResponse;
 import com.kxg.middleground.response.IntegerResultResponse;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -65,9 +69,80 @@ public class ZuesUserServiceImpl implements ZuesUserService {
         KxgZuesUser kxgZuesUser=new KxgZuesUser();
         BeanUtils.copyProperties(request,kxgZuesUser);
         kxgZuesUser.setCreateTime(new Date());
-        kxgZuesUser.setCreateTime(new Date());
+        kxgZuesUser.setUpdateTime(new Date());
         Integer result = kxgZuseUserDao.addUser(kxgZuesUser);
         resultResponse.setResult(result);
         return resultResponse;
     }
+
+    @Override
+    public FindUserInfoResponse findUserInfo(FindUserInfoRequest request) {
+        FindUserInfoResponse response=new FindUserInfoResponse();
+        if (null!=request.getId()){
+            KxgZuesUser zuesById = kxgZuseUserDao.findZuesById(request.getId());
+            BeanUtils.copyProperties(zuesById,response);
+            return response;
+        }
+        if (!StringUtils.isEmpty(request.getOpenId())){
+            List<KxgZuesUser> userByOpenId = kxgZuseUserDao.findUserByOpenId(request.getOpenId());
+            if (CollectionUtils.isEmpty(userByOpenId)){
+                throw new RuntimeException("openid is not right");
+            }
+            BeanUtils.copyProperties(userByOpenId.get(0),response);
+            log.info("user info  response {},userByOpenId is {}",response, JsonUtils.objectToJson(userByOpenId));
+            return response;
+        }
+        if (!StringUtils.isEmpty(request.getPhoneNumber())){
+            List<KxgZuesUser> userByPhoneNumber = kxgZuseUserDao.findUserByPhoneNumber(request.getPhoneNumber());
+            if (CollectionUtils.isEmpty(userByPhoneNumber)){
+                throw new RuntimeException("phone number is not right");
+            }
+            BeanUtils.copyProperties(userByPhoneNumber.get(0),response);
+            return response;
+        }
+        return response;
+    }
+
+    @Override
+    public IntegerResultResponse updateUserInfo(UpdateUserInfoRequest request) {
+        IntegerResultResponse resultResponse=new IntegerResultResponse();
+        if (null!=request.getId()){
+            KxgZuesUser zuesUser=new KxgZuesUser();
+            BeanUtils.copyProperties(request,zuesUser);
+            zuesUser.setUpdateTime(new Date());
+            zuesUser.setOpenId(null);
+            Integer result = kxgZuseUserDao.updateUserInfo(zuesUser);
+            resultResponse.setResult(result);
+            return resultResponse;
+        }
+        if (!StringUtils.isEmpty(request.getOpenId())){
+            List<KxgZuesUser> userByOpenId = kxgZuseUserDao.findUserByOpenId(request.getOpenId());
+            if (CollectionUtils.isEmpty(userByOpenId)){
+                throw new RuntimeException("open id is not right");
+            }
+            KxgZuesUser zuesUser=new KxgZuesUser();
+            zuesUser.setId(userByOpenId.get(0).getId());
+            BeanUtils.copyProperties(request,zuesUser);
+            zuesUser.setUpdateTime(new Date());
+            Integer result = kxgZuseUserDao.updateUserInfo(zuesUser);
+            resultResponse.setResult(result);
+            return resultResponse;
+        }
+
+        if (!StringUtils.isEmpty(request.getPhoneNumber())){
+            List<KxgZuesUser> userByOpenId = kxgZuseUserDao.findUserByPhoneNumber(request.getPhoneNumber());
+            if (CollectionUtils.isEmpty(userByOpenId)){
+                throw new RuntimeException("phone number is not right");
+            }
+            KxgZuesUser zuesUser=new KxgZuesUser();
+            zuesUser.setId(userByOpenId.get(0).getId());
+            BeanUtils.copyProperties(request,zuesUser);
+            zuesUser.setUpdateTime(new Date());
+            Integer result = kxgZuseUserDao.updateUserInfo(zuesUser);
+            resultResponse.setResult(result);
+            return resultResponse;
+        }
+        throw new RuntimeException("please  check request");
+    }
+
 }

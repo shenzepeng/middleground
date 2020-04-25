@@ -15,6 +15,6 @@ public class AddZuesUserRequest implements Serializable {
     private String phoneNumber;
     private String openId;
     private String password;
-    private String headUrl;
+    private String headerUrl;
     private String nickName;
 }
