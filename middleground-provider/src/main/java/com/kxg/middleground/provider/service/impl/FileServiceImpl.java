@@ -2,11 +2,15 @@ package com.kxg.middleground.provider.service.impl;
 import com.kxg.middleground.provider.constants.MiddlerGroudConstans;
 import com.kxg.middleground.provider.client.OSSClientUtil;
 import com.kxg.middleground.provider.dao.KxgImgFileDbDao;
+import com.kxg.middleground.provider.dao.KxgProductDao;
 import com.kxg.middleground.provider.model.FileUrl;
 import com.kxg.middleground.provider.pojo.KxgImgFileDb;
+import com.kxg.middleground.provider.pojo.KxgProduct;
 import com.kxg.middleground.provider.service.FileService;
+import com.kxg.middleground.provider.service.ProductService;
 import com.kxg.middleground.provider.utils.FileSizeUtils;
 import com.kxg.middleground.provider.utils.IpUtil;
+import com.kxg.middleground.request.UploadFileRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,8 +30,12 @@ public class FileServiceImpl implements FileService {
     private KxgImgFileDbDao kxgImgFileDbDao;
     @Autowired
     private OSSClientUtil ossClient;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private KxgProductDao kxgProductDao;
     @Override
-    public FileUrl uploadImg(MultipartFile file, HttpServletRequest request) {
+    public FileUrl uploadImg(MultipartFile file, HttpServletRequest request, UploadFileRequest uploadFileRequest) {
         if (file.isEmpty()){
             throw new RuntimeException("图像不能为空");
         }
@@ -38,12 +46,14 @@ public class FileServiceImpl implements FileService {
         String ipAddr = IpUtil.getIpAddr(request);
         fileUrl.setAddIp(ipAddr);
         fileUrl.setStatus(MiddlerGroudConstans.IMG_NORMAL);
-        //TODO userId appKey
         KxgImgFileDb fileDb=new KxgImgFileDb();
         fileDb.setAddIp(ipAddr);
         fileDb.setCreateTime(new Date());
         fileDb.setImgUrl(fileUrl.getImgUrl());
         fileDb.setStatus(MiddlerGroudConstans.IMG_NORMAL);
+        fileDb.setAppKey(uploadFileRequest.getAppKey());
+        KxgProduct productByAppKey = kxgProductDao.findProductByAppKey(uploadFileRequest.getAppKey());
+        fileDb.setUserId(productByAppKey.getUserId());
         kxgImgFileDbDao.addImgFile(fileDb);
         //将oss缓存的key去掉，这些只保存在数据库中
         String url=fileUrl.getImgUrl().split("\\?")[0];
@@ -52,7 +62,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public FileUrl uploadBigFile(MultipartFile file, HttpServletRequest request) {
+    public FileUrl uploadBigFile(MultipartFile file, HttpServletRequest request,UploadFileRequest uploadFileRequest) {
         if (file.isEmpty()){
             throw new RuntimeException("文件不能为空");
         }
@@ -63,12 +73,15 @@ public class FileServiceImpl implements FileService {
         String ipAddr = IpUtil.getIpAddr(request);
         fileUrl.setAddIp(ipAddr);
         fileUrl.setStatus(MiddlerGroudConstans.FILE_NORMAL);
-        //TODO userId appKey
         KxgImgFileDb fileDb=new KxgImgFileDb();
         fileDb.setAddIp(ipAddr);
         fileDb.setCreateTime(new Date());
         fileDb.setImgUrl(fileUrl.getImgUrl());
         fileDb.setStatus(MiddlerGroudConstans.FILE_NORMAL);
+        kxgImgFileDbDao.addImgFile(fileDb);
+        fileDb.setAppKey(uploadFileRequest.getAppKey());
+        KxgProduct productByAppKey = kxgProductDao.findProductByAppKey(uploadFileRequest.getAppKey());
+        fileDb.setUserId(productByAppKey.getUserId());
         kxgImgFileDbDao.addImgFile(fileDb);
         //将oss缓存的key去掉，这些只保存在数据库中
         String url=fileUrl.getImgUrl().split("\\?")[0];

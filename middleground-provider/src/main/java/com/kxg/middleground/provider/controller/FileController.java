@@ -1,12 +1,13 @@
 package com.kxg.middleground.provider.controller;
 
 import com.kxg.middleground.provider.common.SzpJsonResult;
+import com.kxg.middleground.provider.model.FileUrl;
 import com.kxg.middleground.provider.service.FileService;
+import com.kxg.middleground.request.UploadFileRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * 文件上传
  */
 @RestController
+@Api("文件上传")
 @RequestMapping("file")
 public class FileController {
 
@@ -28,8 +30,9 @@ public class FileController {
      * @return
      */
     @PostMapping("upload/img")
-    public SzpJsonResult<?> uploadImg(HttpServletRequest request, MultipartFile file) {
-        return SzpJsonResult.ok(fileService.uploadImg(file,request));
+    @ApiOperation("图片上传")
+    public SzpJsonResult<FileUrl> uploadImg(HttpServletRequest request, MultipartFile file, @RequestBody UploadFileRequest uploadFileRequest) {
+        return SzpJsonResult.ok(fileService.uploadImg(file,request,uploadFileRequest));
     }
 
     /**
@@ -38,8 +41,9 @@ public class FileController {
      * @param file
      * @return
      */
+    @ApiOperation("大图片上传")
     @PostMapping("upload/bigfile")
-    public SzpJsonResult<?> uploadBigFile(HttpServletRequest request, MultipartFile file){
-        return SzpJsonResult.ok();
+    public SzpJsonResult<FileUrl> uploadBigFile(HttpServletRequest request, MultipartFile file,@RequestBody UploadFileRequest uploadFileRequest){
+        return SzpJsonResult.ok(fileService.uploadBigFile(file, request,uploadFileRequest));
     }
 }
