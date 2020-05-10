@@ -52,7 +52,7 @@ public class ProductController {
      */
     @ApiOperation("添加项目")
     @PostMapping
-    public SzpJsonResult<IntegerResultResponse> addProduct(AddProductRequest request){
+    public SzpJsonResult<IntegerResultResponse> addProduct(@RequestBody AddProductRequest request){
         return SzpJsonResult.ok(productService.addProduct(request));
     }
 }

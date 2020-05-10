@@ -29,7 +29,7 @@ public class AssemblyController {
     @ApiOperation("查看组件列表")
     @PostMapping("search")
     public SzpJsonResult<FindAllAssemblyResponse>  findAllAssembly(@RequestBody FindAllAssemblyRequest request){
-        return SzpJsonResult.ok(assemblyService);
+        return SzpJsonResult.ok(assemblyService.findAssembly(request));
     }
     /**
      * 更新组件
