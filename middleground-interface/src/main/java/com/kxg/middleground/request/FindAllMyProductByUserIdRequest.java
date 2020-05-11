@@ -11,6 +11,6 @@ import lombok.Data;
 public class FindAllMyProductByUserIdRequest {
     private String productName;
     private Long userId;
-    private Integer page;
-    private Integer size;
+    private Integer page=1;
+    private Integer size=5;
 }

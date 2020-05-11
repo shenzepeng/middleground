@@ -24,7 +24,7 @@ public class ProductController {
      * 查看我的项目列表
      */
     @ApiOperation("查看我的项目列表")
-    @GetMapping("user/id/list")
+    @PostMapping("user/id/list")
     public SzpJsonResult<FindMyProductInfoResponse> findMyProductList(@RequestBody FindAllMyProductByUserIdRequest request){
         return SzpJsonResult.ok(productService.findProductByUserId(request));
     }
@@ -35,7 +35,7 @@ public class ProductController {
      * @return
      */
     @ApiOperation("通过openid查看")
-    @GetMapping("openid/list")
+    @PostMapping("openid/list")
     public SzpJsonResult<FindMyProductInfoResponse> findMyProductListByOpenId(@RequestBody FindAllMyProductByOpenIdRequest request){
         return SzpJsonResult.ok(productService.findProductByOpenId(request));
     }
