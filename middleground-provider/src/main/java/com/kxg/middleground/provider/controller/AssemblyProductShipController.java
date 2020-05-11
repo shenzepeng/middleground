@@ -34,7 +34,7 @@ public class AssemblyProductShipController {
      * 拿到该项目还能添加的组件
      */
     @ApiOperation("拿到该项目还能添加的组件")
-    @GetMapping("can/add/product")
+    @PostMapping("can/add/product")
     public SzpJsonResult<FindCanAddAssemblyProductResponse> findCanAddAssembly(@RequestBody FindCanAddAssemblyProductByUserIdRequest request){
         return SzpJsonResult.ok(assemblyProductShipService.findCanAddAssemblyByUserId(request));
     }
