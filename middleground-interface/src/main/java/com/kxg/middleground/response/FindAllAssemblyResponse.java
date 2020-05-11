@@ -1,5 +1,6 @@
 package com.kxg.middleground.response;
 
+import com.kxg.middleground.dto.AssemblyDto;
 import com.kxg.middleground.dto.ZuesAssemblyDto;
 import lombok.Data;
 
@@ -12,6 +13,6 @@ import java.util.List;
  */
 @Data
 public class FindAllAssemblyResponse {
-    private List<ZuesAssemblyDto> assemblyDtos;
+    private List<AssemblyDto> assemblyDtos;
     private Long total;
 }

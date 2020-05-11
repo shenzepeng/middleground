@@ -31,8 +31,8 @@ public class FileController {
      */
     @PostMapping("upload/img")
     @ApiOperation("图片上传")
-    public SzpJsonResult<FileUrl> uploadImg(HttpServletRequest request, MultipartFile file, @RequestBody UploadFileRequest uploadFileRequest) {
-        return SzpJsonResult.ok(fileService.uploadImg(file,request,uploadFileRequest));
+    public SzpJsonResult<FileUrl> uploadImg(HttpServletRequest request, MultipartFile file,String appKey) {
+        return SzpJsonResult.ok(fileService.uploadImg(file,request,appKey));
     }
 
     /**
@@ -43,7 +43,7 @@ public class FileController {
      */
     @ApiOperation("大图片上传")
     @PostMapping("upload/bigfile")
-    public SzpJsonResult<FileUrl> uploadBigFile(HttpServletRequest request, MultipartFile file,@RequestBody UploadFileRequest uploadFileRequest){
-        return SzpJsonResult.ok(fileService.uploadBigFile(file, request,uploadFileRequest));
+    public SzpJsonResult<FileUrl> uploadBigFile(HttpServletRequest request, MultipartFile file,String appKey){
+        return SzpJsonResult.ok(fileService.uploadBigFile(file, request,appKey));
     }
 }

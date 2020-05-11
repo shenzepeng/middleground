@@ -2,6 +2,7 @@ package com.kxg.middleground.provider.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.kxg.middleground.dto.AssemblyDto;
 import com.kxg.middleground.dto.ZuesAssemblyDto;
 import com.kxg.middleground.provider.dao.KxgAssemblyDao;
 import com.kxg.middleground.provider.pojo.KxgAssembly;
@@ -37,7 +38,7 @@ public class AssemblyServiceImpl implements AssemblyService {
 
             List<KxgAssembly> allKxgAssembly = kxgAssemblyDao.findAllKxgAssembly();
             PageInfo<KxgAssembly> pageInfo = new PageInfo<>(allKxgAssembly);
-            response.setAssemblyDtos( getAssmeblyDtoFromKxgAssembly(pageInfo.getList()));
+            response.setAssemblyDtos(getAssmeblyDtoFromKxgAssembly(pageInfo.getList()));
             response.setTotal(pageInfo.getTotal());
             return response;
         }
@@ -61,12 +62,12 @@ public class AssemblyServiceImpl implements AssemblyService {
      * @param allKxgAssembly
      * @return
      */
-    private List<ZuesAssemblyDto> getAssmeblyDtoFromKxgAssembly( List<KxgAssembly> allKxgAssembly){
-        List<ZuesAssemblyDto> zuesAssemblyDtos=new ArrayList<>();
+    private List<AssemblyDto> getAssmeblyDtoFromKxgAssembly(List<KxgAssembly> allKxgAssembly){
+        List<AssemblyDto> zuesAssemblyDtos=new ArrayList<>();
         for (KxgAssembly kxgAssembly : allKxgAssembly) {
-            ZuesAssemblyDto zuesAssemblyDto=new ZuesAssemblyDto();
-            BeanUtils.copyProperties(kxgAssembly,zuesAssemblyDto);
-            zuesAssemblyDtos.add(zuesAssemblyDto);
+            AssemblyDto assemblyDto=new AssemblyDto();
+            BeanUtils.copyProperties(kxgAssembly,assemblyDto);
+            zuesAssemblyDtos.add(assemblyDto);
         }
         return zuesAssemblyDtos;
     }

@@ -7,6 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 
 public interface FileService {
-    FileUrl uploadImg(MultipartFile file, HttpServletRequest request, UploadFileRequest uploadFileRequest) ;
-    FileUrl uploadBigFile(MultipartFile file,HttpServletRequest request,UploadFileRequest uploadFileRequest);
+    FileUrl uploadImg(MultipartFile file, HttpServletRequest request, String appKey) ;
+    FileUrl uploadBigFile(MultipartFile file,HttpServletRequest request,String appKey);
 }

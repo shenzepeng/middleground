@@ -35,7 +35,7 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private KxgProductDao kxgProductDao;
     @Override
-    public FileUrl uploadImg(MultipartFile file, HttpServletRequest request, UploadFileRequest uploadFileRequest) {
+    public FileUrl uploadImg(MultipartFile file, HttpServletRequest request, String appKey) {
         if (file.isEmpty()){
             throw new RuntimeException("图像不能为空");
         }
@@ -44,15 +44,15 @@ public class FileServiceImpl implements FileService {
         }
         FileUrl fileUrl = uploadFileToOss(file);
         String ipAddr = IpUtil.getIpAddr(request);
-        fileUrl.setAddIp(ipAddr);
         fileUrl.setStatus(MiddlerGroudConstans.IMG_NORMAL);
         KxgImgFileDb fileDb=new KxgImgFileDb();
         fileDb.setAddIp(ipAddr);
         fileDb.setCreateTime(new Date());
         fileDb.setImgUrl(fileUrl.getImgUrl());
         fileDb.setStatus(MiddlerGroudConstans.IMG_NORMAL);
-        fileDb.setAppKey(uploadFileRequest.getAppKey());
-        KxgProduct productByAppKey = kxgProductDao.findProductByAppKey(uploadFileRequest.getAppKey());
+        fileDb.setAppKey(appKey);
+        fileDb.setUpdateTime(new Date());
+        KxgProduct productByAppKey = kxgProductDao.findProductByAppKey(appKey);
         fileDb.setUserId(productByAppKey.getUserId());
         kxgImgFileDbDao.addImgFile(fileDb);
         //将oss缓存的key去掉，这些只保存在数据库中
@@ -62,7 +62,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public FileUrl uploadBigFile(MultipartFile file, HttpServletRequest request,UploadFileRequest uploadFileRequest) {
+    public FileUrl uploadBigFile(MultipartFile file, HttpServletRequest request,String appKey) {
         if (file.isEmpty()){
             throw new RuntimeException("文件不能为空");
         }
@@ -71,16 +71,15 @@ public class FileServiceImpl implements FileService {
         }
         FileUrl fileUrl = uploadFileToOss(file);
         String ipAddr = IpUtil.getIpAddr(request);
-        fileUrl.setAddIp(ipAddr);
         fileUrl.setStatus(MiddlerGroudConstans.FILE_NORMAL);
         KxgImgFileDb fileDb=new KxgImgFileDb();
         fileDb.setAddIp(ipAddr);
         fileDb.setCreateTime(new Date());
         fileDb.setImgUrl(fileUrl.getImgUrl());
         fileDb.setStatus(MiddlerGroudConstans.FILE_NORMAL);
-        kxgImgFileDbDao.addImgFile(fileDb);
-        fileDb.setAppKey(uploadFileRequest.getAppKey());
-        KxgProduct productByAppKey = kxgProductDao.findProductByAppKey(uploadFileRequest.getAppKey());
+        fileDb.setAppKey(appKey);
+        KxgProduct productByAppKey = kxgProductDao.findProductByAppKey(appKey);
+        fileDb.setUpdateTime(new Date());
         fileDb.setUserId(productByAppKey.getUserId());
         kxgImgFileDbDao.addImgFile(fileDb);
         //将oss缓存的key去掉，这些只保存在数据库中
@@ -95,8 +94,6 @@ public class FileServiceImpl implements FileService {
         FileUrl fileUrl=new FileUrl();
         String name = ossClient.uploadImg2Oss(file);
         String imgUrlEachOne = ossClient.getImgUrl(name);
-        fileUrl.setCreateTime(new Date());
-        fileUrl.setUpdateTime(new Date());
         //将http转化为https
         String httpToHttps = imgUrlEachOne.replaceAll("http://", "https://");
         //这个url会带缓存的key
