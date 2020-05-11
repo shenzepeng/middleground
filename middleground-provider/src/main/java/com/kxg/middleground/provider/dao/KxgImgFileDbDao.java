@@ -1,8 +1,6 @@
 package com.kxg.middleground.provider.dao;
 
-import com.kxg.middleground.provider.mapper.KxgAssemblyMapper;
 import com.kxg.middleground.provider.mapper.KxgImgFileDbMapper;
-import com.kxg.middleground.provider.pojo.KxgAssembly;
 import com.kxg.middleground.provider.pojo.KxgImgFileDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

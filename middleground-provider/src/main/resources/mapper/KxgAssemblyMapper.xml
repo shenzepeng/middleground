@@ -5,7 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <result column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="assembly_name" jdbcType="VARCHAR" property="assemblyName" />
     <result column="app_key" jdbcType="VARCHAR" property="appKey" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -16,5 +16,7 @@
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
     <result column="controller_api" jdbcType="VARCHAR" property="controllerApi" />
+    <result column="img_icon" jdbcType="VARCHAR" property="imgIcon" />
+    <result column="img_header" jdbcType="VARCHAR" property="imgHeader" />
   </resultMap>
 </mapper>

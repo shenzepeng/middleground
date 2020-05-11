@@ -2,8 +2,13 @@ package com.kxg.middleground.provider.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.kxg.middleground.dto.AssemblyDto;
 import com.kxg.middleground.dto.ProductDto;
+import com.kxg.middleground.provider.dao.KxgAssemblyDao;
+import com.kxg.middleground.provider.dao.KxgAssemblyProductShipDao;
 import com.kxg.middleground.provider.dao.KxgProductDao;
+import com.kxg.middleground.provider.pojo.KxgAssembly;
+import com.kxg.middleground.provider.pojo.KxgAssemblyProductShip;
 import com.kxg.middleground.provider.pojo.KxgProduct;
 import com.kxg.middleground.provider.service.ProductService;
 import com.kxg.middleground.provider.utils.Md5Util;
@@ -11,6 +16,7 @@ import com.kxg.middleground.request.AddProductRequest;
 import com.kxg.middleground.request.FindAllMyProductByOpenIdRequest;
 import com.kxg.middleground.request.FindAllMyProductByUserIdRequest;
 import com.kxg.middleground.response.FindMyProductInfoResponse;
+import com.kxg.middleground.response.FindProductHasAddAssemblyInfoResponse;
 import com.kxg.middleground.response.FindProductInfoResponse;
 import com.kxg.middleground.response.IntegerResultResponse;
 import org.springframework.beans.BeanUtils;
@@ -21,6 +27,8 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @Auther: szp
@@ -31,7 +39,10 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private KxgProductDao kxgProductDao;
-
+    @Autowired
+    private KxgAssemblyProductShipDao kxgAssemblyProductShipDao;
+    @Autowired
+    private KxgAssemblyDao kxgAssemblyDao;
     @Override
     public IntegerResultResponse addProduct(AddProductRequest addProductRequest) {
         IntegerResultResponse resultResponse=new IntegerResultResponse();
@@ -108,6 +119,30 @@ public class ProductServiceImpl implements ProductService {
         FindProductInfoResponse response=new FindProductInfoResponse();
         KxgProduct productById = kxgProductDao.findProductById(productId);
         BeanUtils.copyProperties(productById,response);
+        return response;
+    }
+
+    @Override
+    public FindProductHasAddAssemblyInfoResponse findHasAddAssemblyInfo(Long productId) {
+        FindProductHasAddAssemblyInfoResponse response=new FindProductHasAddAssemblyInfoResponse();
+        //当前项目信息
+        KxgProduct productById = kxgProductDao.findProductById(productId);
+        List<KxgAssemblyProductShip> shipByProductId = kxgAssemblyProductShipDao.findShipByProductId(productId);
+        List<Long> assemblyIds = shipByProductId.stream().map(t -> t.getAssemblyId()).collect(Collectors.toList());
+        //接入的组件
+        List<KxgAssembly> kxgAssemblyList = kxgAssemblyDao.findAssemblyByIds(assemblyIds);
+        ProductDto productDto=new ProductDto();
+        BeanUtils.copyProperties(productById,productDto);
+        List<AssemblyDto> assemblyDtoList = kxgAssemblyList.stream().map(new Function<KxgAssembly, AssemblyDto>() {
+            @Override
+            public AssemblyDto apply(KxgAssembly kxgAssembly) {
+                AssemblyDto assemblyDto = new AssemblyDto();
+                BeanUtils.copyProperties(kxgAssembly, assemblyDto);
+                return assemblyDto;
+            }
+        }).collect(Collectors.toList());
+        response.setAssemblyDtos(assemblyDtoList);
+        response.setProductDto(productDto);
         return response;
     }
 }

@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 @Table(name = "t_assembly")
 public class KxgAssembly {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -36,6 +37,12 @@ public class KxgAssembly {
 
     @Column(name = "controller_api")
     private String controllerApi;
+
+    @Column(name = "img_icon")
+    private String imgIcon;
+
+    @Column(name = "img_header")
+    private String imgHeader;
 
     /**
      * @return id
@@ -189,5 +196,33 @@ public class KxgAssembly {
      */
     public void setControllerApi(String controllerApi) {
         this.controllerApi = controllerApi == null ? null : controllerApi.trim();
+    }
+
+    /**
+     * @return img_icon
+     */
+    public String getImgIcon() {
+        return imgIcon;
+    }
+
+    /**
+     * @param imgIcon
+     */
+    public void setImgIcon(String imgIcon) {
+        this.imgIcon = imgIcon == null ? null : imgIcon.trim();
+    }
+
+    /**
+     * @return img_header
+     */
+    public String getImgHeader() {
+        return imgHeader;
+    }
+
+    /**
+     * @param imgHeader
+     */
+    public void setImgHeader(String imgHeader) {
+        this.imgHeader = imgHeader == null ? null : imgHeader.trim();
     }
 }

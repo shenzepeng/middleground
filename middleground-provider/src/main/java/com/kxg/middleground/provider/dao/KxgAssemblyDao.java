@@ -63,4 +63,11 @@ public class KxgAssemblyDao {
     public KxgAssembly findAssemblyById(Long id){
         return kxgAssemblyMapper.selectByPrimaryKey(id);
     }
+
+    public List<KxgAssembly> findAssemblyByIds(List<Long> ids){
+        Example example=new Example(KxgAssembly.class);
+        example.createCriteria()
+                .andIn("id",ids);
+        return kxgAssemblyMapper.selectByExample(example);
+    }
 }

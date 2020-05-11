@@ -5,10 +5,7 @@ import com.kxg.middleground.provider.service.ProductService;
 import com.kxg.middleground.request.AddProductRequest;
 import com.kxg.middleground.request.FindAllMyProductByOpenIdRequest;
 import com.kxg.middleground.request.FindAllMyProductByUserIdRequest;
-import com.kxg.middleground.response.FindAllProductByUserIdResponse;
-import com.kxg.middleground.response.FindMyProductInfoResponse;
-import com.kxg.middleground.response.FindProductInfoResponse;
-import com.kxg.middleground.response.IntegerResultResponse;
+import com.kxg.middleground.response.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +51,13 @@ public class ProductController {
     @PostMapping
     public SzpJsonResult<IntegerResultResponse> addProduct(@RequestBody AddProductRequest request){
         return SzpJsonResult.ok(productService.addProduct(request));
+    }
+    /**
+     * 已经添加的组件
+     */
+    @ApiOperation("已经添加的组件")
+    @PostMapping("has/add")
+    public SzpJsonResult<FindProductHasAddAssemblyInfoResponse> findHasAdd(Long productId){
+        return SzpJsonResult.ok(productService.findHasAddAssemblyInfo(productId));
     }
 }

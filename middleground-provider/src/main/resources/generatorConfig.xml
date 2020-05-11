@@ -7,10 +7,10 @@
     <!--<properties resource="generator.properties"></properties>-->
 
     <!--指定特定数据库的jdbc驱动jar包的位置 -->
-    <classPathEntry
-            location="D:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\jbr\bin\本地仓库路径\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
 <!--    <classPathEntry-->
-<!--            location="/Users/mac/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar"/>-->
+<!--            location="D:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\jbr\bin\本地仓库路径\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>-->
+    <classPathEntry
+            location="/Users/mac/.m2/repository/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar"/>
 
     <context id="MySql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
@@ -72,9 +72,9 @@
              -->
         <!-- <property name="rootInterface" value="com.kxg.middleground.provider.mapper.CommonMapper"/>-->
         </javaClientGenerator>
-<!--        <table tableName="t_assembly" domainObjectName="KxgAssembly">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="t_assembly" domainObjectName="KxgAssembly">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 <!--        <table tableName="t_img_file_db" domainObjectName="KxgImgFileDb">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
@@ -105,12 +105,12 @@
 <!--        <table tableName="t_static_file_db" domainObjectName="KxgStaticFileDb">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="t_assembly_product_ship" domainObjectName="KxgAssemblyProductShip">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="t_assembly_serect" domainObjectName="KxgAssemblySerect">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--        <table tableName="t_assembly_product_ship" domainObjectName="KxgAssemblyProductShip">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="t_assembly_serect" domainObjectName="KxgAssemblySerect">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 <!--        <table tableName="t_zues_user" domainObjectName="KxgZuesUser">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->

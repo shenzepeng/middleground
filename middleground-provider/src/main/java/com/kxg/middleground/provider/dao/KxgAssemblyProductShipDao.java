@@ -1,7 +1,6 @@
 package com.kxg.middleground.provider.dao;
 
 import com.kxg.middleground.provider.mapper.KxgAssemblyProductShipMapper;
-import com.kxg.middleground.provider.pojo.KxgAssembly;
 import com.kxg.middleground.provider.pojo.KxgAssemblyProductShip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,6 +39,7 @@ public class KxgAssemblyProductShipDao {
         Example example=new Example(KxgAssemblyProductShip.class);
         example.createCriteria()
                 .andEqualTo("productId",productId);
+        example.orderBy("id").desc();
         return shipMapper.selectByExample(example);
     }
 
@@ -54,5 +54,6 @@ public class KxgAssemblyProductShipDao {
                 .andEqualTo("assemblyId",assemblyId);
         return shipMapper.selectByExample(example);
     }
+
 
 }
