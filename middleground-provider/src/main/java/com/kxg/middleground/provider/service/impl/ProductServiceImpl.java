@@ -6,6 +6,7 @@ import com.kxg.middleground.dto.ProductDto;
 import com.kxg.middleground.provider.dao.KxgProductDao;
 import com.kxg.middleground.provider.pojo.KxgProduct;
 import com.kxg.middleground.provider.service.ProductService;
+import com.kxg.middleground.provider.utils.Md5Util;
 import com.kxg.middleground.request.AddProductRequest;
 import com.kxg.middleground.request.FindAllMyProductByOpenIdRequest;
 import com.kxg.middleground.request.FindAllMyProductByUserIdRequest;
@@ -38,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
         BeanUtils.copyProperties(addProductRequest,kxgProduct);
         kxgProduct.setCreateTime(new Date());
         kxgProduct.setUpdateTime(new Date());
+        kxgProduct.setAppKey(Md5Util.getKey());
         Integer result = kxgProductDao.addProduct(kxgProduct);
         resultResponse.setResult(result);
         return resultResponse;
