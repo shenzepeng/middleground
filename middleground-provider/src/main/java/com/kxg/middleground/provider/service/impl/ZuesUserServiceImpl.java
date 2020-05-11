@@ -52,6 +52,8 @@ public class ZuesUserServiceImpl implements ZuesUserService {
         //当前openID不存在则
         if (CollectionUtils.isEmpty(userByOpenId)){
             resultResponse.setResult(1);
+            resultResponse.setOpenId(openId);
+            return resultResponse;
         }
         resultResponse.setResult(0);
         resultResponse.setOpenId(openId);

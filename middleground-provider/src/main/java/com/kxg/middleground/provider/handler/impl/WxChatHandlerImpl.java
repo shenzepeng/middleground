@@ -37,10 +37,15 @@ public class WxChatHandlerImpl implements WxChatHandler {
         //写死
         param.put("grant_type", "authorization_code");
         String wxResult = HttpClientUtil.doGet(url, param);
-        log.info("获取档期的结果,微信信息-{}",wxResult);
+        log.info("获取当前的结果,微信信息-{}",wxResult);
         WXSessionModel model = JsonUtils.jsonToPojo(wxResult, WXSessionModel.class);
         return  model.getOpenid();
     }
 
+    public static void main(String[] args) {
+        WxChatHandlerImpl wxChatHandler=new WxChatHandlerImpl();
+        String wxChatOpenIdHandler = wxChatHandler.getWxChatOpenIdHandler("023Nxpyf1gSiCu0izFwf184wyf1Nxpy0");
+        System.out.println(wxChatOpenIdHandler);
+    }
 
 }
