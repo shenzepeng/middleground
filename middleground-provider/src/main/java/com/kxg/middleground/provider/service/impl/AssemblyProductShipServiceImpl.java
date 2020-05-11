@@ -46,7 +46,9 @@ public class AssemblyProductShipServiceImpl implements AssemblyProductShipServic
             assemblyProductShip.setCreateTime(new Date());
             assemblyProductShip.setUpdateTime(new Date());
             assemblyProductShip.setProductId(productId);
+            needAddShip.add(assemblyProductShip);
         }
+        log.info("add assembly and product ship {}",needAddShip);
         Integer result = assemblyProductShipDao.addShipList(needAddShip);
         integerResultResponse.setResult(result);
         return integerResultResponse;

@@ -57,7 +57,7 @@ public class UserController {
     @ApiOperation("更新新的用户信息")
     @PutMapping("update/user/info")
     public SzpJsonResult<IntegerResultResponse> updateUserInfo(@RequestBody UpdateUserInfoRequest request){
-        return SzpJsonResult.ok();
+        return SzpJsonResult.ok(zuesUserService.updateUserInfo(request));
     }
 
 
