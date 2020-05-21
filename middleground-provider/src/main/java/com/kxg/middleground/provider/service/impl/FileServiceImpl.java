@@ -66,8 +66,8 @@ public class FileServiceImpl implements FileService {
         if (file.isEmpty()){
             throw new RuntimeException("文件不能为空");
         }
-        if (FileSizeUtils.getMbSize(file.getSize())>allowedFileSize){
-            throw new RuntimeException("文件大于允许上传大小-"+allowedFileSize+"MB");
+        if (FileSizeUtils.getMbSize(file.getSize())>bigFileAllowedFileSize){
+            throw new RuntimeException("文件大于允许上传大小-"+bigFileAllowedFileSize+"MB");
         }
         FileUrl fileUrl = uploadFileToOss(file);
         String ipAddr = IpUtil.getIpAddr(request);
