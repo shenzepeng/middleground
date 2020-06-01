@@ -79,9 +79,11 @@ public class FileServiceImpl implements FileService {
         fileDb.setStatus(MiddlerGroudConstans.FILE_NORMAL);
         fileDb.setAppKey(appKey);
         KxgProduct productByAppKey = kxgProductDao.findProductByAppKey(appKey);
+        log.info("通过appkey所有项目搜索结果为 {},appKey  {},kxgProductDao",productByAppKey,appKey,kxgProductDao);
         fileDb.setUpdateTime(new Date());
         fileDb.setUserId(productByAppKey.getUserId());
         kxgImgFileDbDao.addImgFile(fileDb);
+
         //将oss缓存的key去掉，这些只保存在数据库中
         String url=fileUrl.getImgUrl().split("\\?")[0];
         fileUrl.setImgUrl(url);

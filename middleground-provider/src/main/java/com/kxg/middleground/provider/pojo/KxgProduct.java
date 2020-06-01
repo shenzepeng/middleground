@@ -1,8 +1,10 @@
 package com.kxg.middleground.provider.pojo;
 
+import lombok.Data;
+
 import java.util.Date;
 import javax.persistence.*;
-
+@Data
 @Table(name = "t_product")
 public class KxgProduct {
     @Id

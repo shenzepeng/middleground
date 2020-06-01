@@ -1,5 +1,7 @@
 import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.kxg.middleground.provider.DubboProviderBootstrap;
+import com.kxg.middleground.provider.dao.KxgProductDao;
+import com.kxg.middleground.provider.pojo.KxgProduct;
 import com.kxg.middleground.provider.service.ZuesUserService;
 import com.kxg.middleground.request.FindUserInfoRequest;
 import com.kxg.middleground.response.FindUserInfoResponse;
@@ -32,5 +34,12 @@ public class Test1 {
         request.setOpenId("ox2655WxAiYBDZElN511cMygCjLk");
         FindUserInfoResponse userInfo = zuesUserService.findUserInfo(request);
         System.out.println(userInfo);
+    }
+    @Autowired
+    private KxgProductDao kxgProductDao;
+    @Test
+    public void test3(){
+        KxgProduct productByAppKey = kxgProductDao.findProductByAppKey("2D82A760C145BC93");
+        System.out.println(productByAppKey);
     }
 }
